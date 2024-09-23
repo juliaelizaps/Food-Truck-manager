@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+//import 'package:google_fonts/google_fonts.dart';
+import 'package:projeto_1/loginpage.dart';
+import 'package:projeto_1/homePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,52 +10,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Login Page',
       theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
+        appBarTheme: const AppBarTheme(
+          color: Colors.red,
+        )
       ),
-      home: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(color: Colors.deepPurple,width: 100,height: 100,),
-                Container(color: Colors.black, width: 50,height: 50,),
-              ],
-            ),
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(color: Colors.deepPurple,width:400,height: 500,),
-                Container(color: Colors.purpleAccent, width: 400,height: 50,),
-              ],
-            )
-
-          ],
-        ),
-      )
-
-
-      /* Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Container(color: Colors.deepPurple,width: 100,height: 100,),
-            Container(color: Colors.blue, width: 50,height: 50,),
-          ]
-      )
-       */
+      home: const LoginPage(),
+      //home: const HomePage(),
     );
   }
 }
-
-
