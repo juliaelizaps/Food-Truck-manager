@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'loginpage.dart';
-import 'package:projeto_1/dashboardPage.dart';
+import 'package:projeto_1/pages/dashboardPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -68,13 +68,6 @@ class HomePage extends StatelessWidget {
               },
             ),
 
-            ListTile(
-              leading: const Icon(Icons.restaurant_menu),
-              title: const Text('Cardápio'),
-              onTap: () {
-                // Ação ao clicar no botão Cardápio
-              },
-            ),
             ListTile(
               leading: const Icon(Icons.shopping_bag),
               title: const Text('Produtos'),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_1/homePage.dart';
+import 'package:projeto_1/pages/homePage.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
