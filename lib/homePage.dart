@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'loginpage.dart';
+import 'package:projeto_1/dashboardPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,22 +9,46 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('HOME'),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                 color: Colors.red,
               ),
-              child: Text(
-                'Sistema GFE',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/logo_GF.png',
+                    height: 100,
+                  ),
+                  const SizedBox(width: 30), // Espaço entre a imagem e o texto
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Gerenciador',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'de vendas',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             ListTile(
@@ -32,13 +58,16 @@ class HomePage extends StatelessWidget {
                 // Ação ao clicar no botão Home
               },
             ),
+
             ListTile(
               leading: const Icon(Icons.dashboard),
               title: const Text('Dashboard'),
               onTap: () {
-                // Ação ao clicar no botão Dashboard
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const DashboardPage()),
+                );
               },
             ),
+
             ListTile(
               leading: const Icon(Icons.restaurant_menu),
               title: const Text('Cardápio'),
@@ -79,13 +108,42 @@ class HomePage extends StatelessWidget {
               title: const Text('Logout'),
               onTap: () {
                 // Ação ao clicar no botão Logout
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
               },
             ),
           ],
         ),
       ),
-      body: const Center(
-        child: Text('Bem-vindo à Home Page!'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: [
+            Card(
+              child: ListTile(
+                title: const Text('Resumo do Dia'),
+                subtitle: const Text('Total de Vendas: R\$ 500,00\nPedidos: 20\nItens Mais Vendidos: Hambúrguer, Batata Frita'),
+                leading: const Icon(Icons.assessment),
+                onTap: () {
+                  // Ação ao clicar no resumo do dia
+                },
+              ),
+            ),
+            Card(
+              child: ListTile(
+                title: const Text('Notificações'),
+                subtitle: const Text('2 itens de estoque baixo\n1 pedido pendente'),
+                leading: const Icon(Icons.notifications),
+                onTap: () {
+                  // Ação ao clicar nas notificações
+                },
+              ),
+            ),
+            // Adicione mais cards conforme necessário...
+          ],
+        ),
       ),
     );
   }

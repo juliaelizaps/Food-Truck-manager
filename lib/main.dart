@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:google_fonts/google_fonts.dart';
 import 'package:projeto_1/loginpage.dart';
 import 'package:projeto_1/homePage.dart';
 
@@ -18,10 +17,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         appBarTheme: const AppBarTheme(
           color: Colors.red,
-        )
+        ),
       ),
       home: const LoginPage(),
-      //home: const HomePage(),
     );
   }
 }
