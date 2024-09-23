@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'loginpage.dart';
 import 'package:projeto_1/pages/dashboardPage.dart';
+import 'package:projeto_1/pages/productPage.dart';
+import 'package:projeto_1/pages/orderPage.dart';
+import 'package:projeto_1/pages/historyPage.dart';
+import 'package:projeto_1/pages/inventoryPage.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,7 +60,8 @@ class HomePage extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                // Ação ao clicar no botão Home
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomePage()),
+                );
               },
             ),
 
@@ -72,28 +78,32 @@ class HomePage extends StatelessWidget {
               leading: const Icon(Icons.shopping_bag),
               title: const Text('Produtos'),
               onTap: () {
-                // Ação ao clicar no botão Produtos
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const ProductPage()),
+                );
               },
             ),
             ListTile(
               leading: const Icon(Icons.receipt),
               title: const Text('Pedidos'),
               onTap: () {
-                // Ação ao clicar no botão Pedidos
+               Navigator.push(context, MaterialPageRoute(builder: (context)=> const OrderPage()),
+               );
               },
             ),
             ListTile(
               leading: const Icon(Icons.history),
               title: const Text('Histórico de Pedidos'),
               onTap: () {
-                // Ação ao clicar no botão Histórico de Pedidos
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const HistoryPage()),
+                );
               },
             ),
             ListTile(
               leading: const Icon(Icons.inventory),
               title: const Text('Estoque'),
               onTap: () {
-                // Ação ao clicar no botão Estoque
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const InventoryPage()),
+                );
               },
             ),
             ListTile(
