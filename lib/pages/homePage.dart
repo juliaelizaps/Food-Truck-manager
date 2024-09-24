@@ -102,8 +102,7 @@ class HomePage extends StatelessWidget {
               leading: const Icon(Icons.inventory),
               title: const Text('Estoque'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const InventoryPage()),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const InventoryPage()));
               },
             ),
             ListTile(
