@@ -9,7 +9,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 - [Flutter](https://flutter.dev/docs/get-started/install)
 - [Dart](https://dart.dev/get-dart)
 - [Git](https://git-scm.com/)
-- [Android Studio Bumblebee](https://developer.android.com/studio
+- [Android Studio Bumblebee](https://developer.android.com/studio)
 
 ## Instalação
 
