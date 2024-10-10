@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../ widgets/sideBar.dart';
+
 class OrderPage extends StatelessWidget {
   const OrderPage({Key? key}) : super(key: key);
 
@@ -12,6 +14,7 @@ class OrderPage extends StatelessWidget {
 
         ],
       ),
+      drawer:const SideBar(),
       body: const Center(
         child: Text(
           'visualize aqui os pedidos',

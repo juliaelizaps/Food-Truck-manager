@@ -3,6 +3,7 @@ class ProductComposition {
   final int finalProductId;
   final int ingredientProductId;
   final int requiredQuantity;
+  //mudar o nome das váriaveis de acordo com oq vai vir da API(pra fazer a composição do produto)
 
   ProductComposition({
     required this.id,

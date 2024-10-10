@@ -3,6 +3,7 @@ class Inventory {
   final int productId;
   final int availableQuantity;
   final DateTime lastUpdated;
+  //mudar de acordo com as informações que virão da api(para estoque)
 
   Inventory({
     required this.id,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../ widgets/sideBar.dart';
+
 class AddProduct extends StatefulWidget {
   @override
   _AddProductState createState() => _AddProductState();
@@ -19,6 +21,7 @@ class _AddProductState extends State<AddProduct> {
       appBar: AppBar(
         title: Text('Adicionar Produto'),
       ),
+      drawer:const SideBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

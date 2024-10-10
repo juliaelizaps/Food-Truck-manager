@@ -4,6 +4,7 @@ class Product {
   final String description;
   final double price;
   final String type;
+  //adicionar a foto do lanche também aqui(para pagina de produtos)
 
   Product({
     required this.id,
