@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gf/src/routes/app_routes.dart';
 import 'package:gf/src/shared/colors.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
@@ -59,9 +61,9 @@ class _InitialPageState extends State<InitialPage>
                     child: const Padding(
                         padding: EdgeInsets.all(8),
                         child: Icon(
+                          MdiIcons.chefHat,
                           size: 150,
                           color: AppColors.initialPageItem,
-                          Icons.fastfood,
                         )),
                   )
                 ],

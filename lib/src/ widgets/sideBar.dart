@@ -10,7 +10,7 @@ class SideBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topRight: Radius.circular(50),
+        topRight: Radius.circular(90),
         bottomRight: Radius.circular(0),
       ),
       child: Drawer(
