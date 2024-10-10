@@ -1,16 +1,37 @@
-# gf
+# Gerencie
 
-Sales Manager
+Gerencie é um App feito em Flutter, criado para ajudar o gerencimento de vendas e de estoque de Food Trucks.
 
-## Getting Started
+## Pré-requisitos de como iniciar o projeto:
 
-This project is a starting point for a Flutter application.
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter](https://flutter.dev/docs/get-started/install)
+- [Dart](https://dart.dev/get-dart)
+- [Git](https://git-scm.com/)
+- [Android Studio Bumblebee](https://developer.android.com/studio
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Instalação
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Siga os passos abaixo para configurar e iniciar o projeto:
+
+### 1. Clone o repositório
+
+clone: https://github.com/juliaelizaps/Food-Truck-manager
+
+### 2. Iniciando o projeto
+
+Depois de clonar o repositório e abri-lo no Android Studio:
+- pub get (pubspec.yaml)
+- flutter run (terminal)
+
+### 3. Fork este repositório.
+
+Crie uma branch para sua feature (git checkout -b feature/nome-da-feature).
+
+Commit suas mudanças (git commit -m 'Adiciona nova feature').
+
+Push para a branch (git push origin feature/nome-da-feature).
+
+Abra um Pull Request.
+
