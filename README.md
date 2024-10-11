@@ -27,6 +27,8 @@ Depois de clonar o repositório e abri-lo no Android Studio:
 
 ### 3. Fork este repositório.
 
+Siga a UI do Projeto: https://www.figma.com/design/Q9kNFXt6S1nII137fVKRay/App-UI-Flutter?node-id=0-1&m=dev&t=mMfdEX7jhYPDBG30-1
+
 Crie uma branch para sua feature (git checkout -b feature/nome-da-feature).
 
 Commit suas mudanças (git commit -m 'Adiciona nova feature').
