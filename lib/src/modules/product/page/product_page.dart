@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../shared/components/sideBar.dart';
+import '../../../shared/components/sideBar.dart';
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class ProductPage extends StatelessWidget {
+  const ProductPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: const Text('Produtos'),
         actions: [
 
         ],
@@ -17,7 +17,7 @@ class DashboardPage extends StatelessWidget {
       drawer:const SideBar(),
       body: const Center(
         child: Text(
-          'Bem-vindo ao Dashboard!',
+          'visualize aqui os produtos',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
 
         ),

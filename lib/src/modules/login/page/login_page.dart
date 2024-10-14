@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gf/src/pages/login/password_visibility_controller.dart';
 import 'package:gf/src/shared/colors/colors.dart';
-import '../../routes/app_routes.dart';
+import '../../../routes/app_routes.dart';
 import 'package:animate_do/animate_do.dart';
-
-import '../../shared/components/red_buttom.dart';
+import '../../../shared/components/red_button.dart';
+import '../controller/password_visibility_controller.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ///sizedBox do Login e Senha
+            ///Login e Senha
             const SizedBox(
               height: 80,
             ),

@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../shared/components/sideBar.dart';
+import '../../../shared/components/sideBar.dart';
 
-class InventoryPage extends StatelessWidget {
-  const InventoryPage({Key? key}) : super(key: key);
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pedidos'),
-        actions: [
-
-        ],
+        title: const Text('Histórico'),
+        actions: const [],
       ),
       drawer:const SideBar(),
       body: const Center(
         child: Text(
-          'visualize aqui o estoque',
+          'visualize aqui o histórico de pedidos',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
 
         ),

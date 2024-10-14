@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gf/src/pages/dashboard_page.dart';
-import 'package:gf/src/pages/history_page.dart';
-import 'package:gf/src/pages/home_page.dart';
-import 'package:gf/src/pages/inventory_page.dart';
-import 'package:gf/src/pages/login/login_page.dart';
-import 'package:gf/src/%20widgets/logout_widget.dart';
-import 'package:gf/src/pages/order_Page.dart';
-import 'package:gf/src/pages/product_Page.dart';
+import 'package:gf/src/modules/home/page/home_page.dart';
 import 'package:gf/src/shared/colors/colors.dart';
-import 'src/pages/initial_page.dart';
+import 'src/modules/dashboard/page/dashboard_page.dart';
+import 'src/modules/history/page/history_page.dart';
+import 'src/modules/initial/page/initial_page.dart';
+import 'src/modules/inventory/page/inventory_page.dart';
+import 'src/modules/login/page/login_page.dart';
+import 'src/modules/order/page/order_page.dart';
+import 'src/modules/product/page/product_page.dart';
 import 'src/routes/app_routes.dart';
+
 
 
 void main() {
@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
         AppRouter.history: (context) => const HistoryPage(),
         AppRouter.inventory: (context) => const InventoryPage(),
       },
-      //ExamplePage(),
     );
   }
 }
