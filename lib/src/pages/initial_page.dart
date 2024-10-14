@@ -39,7 +39,7 @@ class _InitialPageState extends State<InitialPage>
   Widget build(BuildContext context) {
     redirect(context);
     return Scaffold(
-      backgroundColor: AppColors.initialPageBackground,
+      backgroundColor: AppColors.initialPageBackground2,
       body: SafeArea(
           child: Center(
             child: SizedBox(

@@ -3,7 +3,7 @@ import 'package:gf/src/pages/dashboard_page.dart';
 import 'package:gf/src/pages/history_page.dart';
 import 'package:gf/src/pages/home_page.dart';
 import 'package:gf/src/pages/inventory_page.dart';
-import 'package:gf/src/pages/login_page.dart';
+import 'package:gf/src/pages/login/login_page.dart';
 import 'package:gf/src/%20widgets/logout_widget.dart';
 import 'package:gf/src/pages/order_Page.dart';
 import 'package:gf/src/pages/product_Page.dart';
