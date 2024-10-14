@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gf/src/pages/login/password_visibility_controller.dart';
-import 'package:gf/src/shared/colors.dart';
+import 'package:gf/src/shared/colors/colors.dart';
 import '../../routes/app_routes.dart';
 import 'package:animate_do/animate_do.dart';
 

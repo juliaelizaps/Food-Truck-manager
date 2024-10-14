@@ -7,7 +7,7 @@ import 'package:gf/src/pages/login/login_page.dart';
 import 'package:gf/src/%20widgets/logout_widget.dart';
 import 'package:gf/src/pages/order_Page.dart';
 import 'package:gf/src/pages/product_Page.dart';
-import 'package:gf/src/shared/colors.dart';
+import 'package:gf/src/shared/colors/colors.dart';
 import 'src/pages/initial_page.dart';
 import 'src/routes/app_routes.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       home: const InitialPage(),
       debugShowCheckedModeBanner: false,
       routes: {
-        AppRouter.login: (context) => LoginPage(),
+        AppRouter.login: (context) => const LoginPage(),
         AppRouter.home: (context) => const HomePage(),
         AppRouter.dashboard: (context) => const DashboardPage(),
         AppRouter.product: (context) => const ProductPage(),

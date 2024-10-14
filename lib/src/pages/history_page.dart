@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ widgets/sideBar.dart';
+import '../shared/components/sideBar.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({Key? key}) : super(key: key);

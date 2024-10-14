@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ widgets/sideBar.dart';
+import '../shared/components/sideBar.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({Key? key}) : super(key: key);

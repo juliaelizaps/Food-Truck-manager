@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gf/src/%20widgets/sideBar.dart';
+import 'package:gf/src/shared/components/sideBar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
