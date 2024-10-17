@@ -29,6 +29,8 @@ Depois de clonar o repositório e abri-lo no Android Studio:
 
 Siga a UI do Projeto: https://www.figma.com/design/Q9kNFXt6S1nII137fVKRay/App-UI-Flutter?node-id=0-1&m=dev&t=mMfdEX7jhYPDBG30-1
 
+Link do Trello: https://trello.com/b/1yZi1wnn/food-truck
+
 Crie uma branch para sua feature (git checkout -b feature/nome-da-feature).
 
 ### 3. Abra um Pull Request.
