@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "535611524508",
+    "project_id": "gerencie-b058a",
+    "storage_bucket": "gerencie-b058a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535611524508:android:1325a60ccd17034ad87459",
+        "android_client_info": {
+          "package_name": "com.example.gf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxAJjFl9GqMfUeqyB_ojgWsW0Eocv4Jwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
