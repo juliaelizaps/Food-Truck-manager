@@ -1,26 +1,31 @@
 class Product {
+
+  ///código abaixo é de exemplo, muda pra funcionar
+  ///
   final int id;
-  final String name;
-  final String description;
-  final double price;
-  final String type;
-  //adicionar a foto do lanche também aqui(para pagina de produtos)
+  final int productId;
+  final int availableQuantity;
+  final DateTime lastUpdated;
 
   Product({
     required this.id,
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.type,
+    required this.productId,
+    required this.availableQuantity,
+    required this.lastUpdated,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      price: json['price'],
-      type: json['type'],
-    );
+  Product.fromMap(Map<String, dynamic> map)
+      : id = map["id"],
+        productId = map["productId"],
+        availableQuantity = map["availableQuantity"],
+        lastUpdated = map["lastUpdated"];
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "productId": productId,
+      "availableQuantity": availableQuantity,
+      "lastUpdated": lastUpdated,
+    };
   }
 }

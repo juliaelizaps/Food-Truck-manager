@@ -1,23 +1,31 @@
 class ProductComposition {
+
+  ///código abaixo é de exemplo, muda pra funcionar
+  ///
   final int id;
-  final int finalProductId;
-  final int ingredientProductId;
-  final int requiredQuantity;
-  //mudar o nome das váriaveis de acordo com oq vai vir da API(pra fazer a composição do produto)
+  final int name;
+  final int availableQuantity;
+  final DateTime lastUpdated;
 
   ProductComposition({
     required this.id,
-    required this.finalProductId,
-    required this.ingredientProductId,
-    required this.requiredQuantity,
+    required this.name,
+    required this.availableQuantity,
+    required this.lastUpdated,
   });
 
-  factory ProductComposition.fromJson(Map<String, dynamic> json) {
-    return ProductComposition(
-      id: json['id'],
-      finalProductId: json['final_product_id'],
-      ingredientProductId: json['ingredient_product_id'],
-      requiredQuantity: json['required_quantity'],
-    );
+  ProductComposition.fromMap(Map<String, dynamic> map)
+      : id = map["id"],
+        name = map["name"],
+        availableQuantity = map["availableQuantity"],
+        lastUpdated = map["lastUpdated"];
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "productId": name,
+      "availableQuantity": availableQuantity,
+      "lastUpdated": lastUpdated,
+    };
   }
 }

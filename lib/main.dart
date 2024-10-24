@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gf/src/modules/home/page/home_page.dart';
 import 'package:gf/src/shared/colors/colors.dart';
@@ -19,7 +20,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
-}
+
+  }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

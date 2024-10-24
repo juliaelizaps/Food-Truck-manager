@@ -1,23 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Inventory {
-  final int id;
-  final int productId;
-  final int availableQuantity;
+  final String id;
+  final String name;
+  final int quantity;
   final DateTime lastUpdated;
-  //mudar de acordo com as informações que virão da api(para estoque)
 
   Inventory({
     required this.id,
-    required this.productId,
-    required this.availableQuantity,
+    required this.name,
+    required this.quantity,
     required this.lastUpdated,
   });
 
-  factory Inventory.fromJson(Map<String, dynamic> json) {
-    return Inventory(
-      id: json['id'],
-      productId: json['product_id'],
-      availableQuantity: json['available_quantity'],
-      lastUpdated: DateTime.parse(json['last_updated']),
-    );
+  Inventory.fromMap(Map<String, dynamic> map)
+      : id = map["id"],
+        name = map["name"],
+        quantity = map["quantity"],
+        lastUpdated = (map["lastUpdated"] as Timestamp).toDate();
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "name": name,
+      "quantity": quantity,
+      'lastUpdated': Timestamp.fromDate(lastUpdated),
+    };
   }
 }
+
