@@ -1,23 +1,26 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:gf/src/shared/components/red_button.dart';
 import 'package:gf/src/modules/inventory/model/inventory_model.dart';
 
 class InventoryFormModal {
-  static void showFormModal(BuildContext context, FirebaseFirestore bdFirebase, VoidCallback refresh) {
+  static void showFormModal(BuildContext context, FirebaseFirestore bdFirebase, VoidCallback refresh, {Inventory? model}) {
     String labelTitle = "Adicionar produto ao estoque";
-    String labelConfirmationButton = "Salvar";
+    String labelConfirmationButton = "Adicionar";
     String labelSkipButton = "Cancelar";
-
-    // Controladores dos campos que receberão o nome e a quantidade do produto do estoque
     TextEditingController nameController = TextEditingController();
     TextEditingController quantityController = TextEditingController();
 
+    if (model != null) {
+      labelTitle = "Editar: ${model.name}";
+      nameController.text = model.name;
+      quantityController.text = model.quantity.toString(); // Preenchendo a quantidade
+      labelConfirmationButton = "Salvar Alterações";
+    }
 
     showModalBottomSheet(
       context: context,
-
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(24),
@@ -27,7 +30,6 @@ class InventoryFormModal {
         return Container(
           height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.all(32.0),
-          // Formulário com Título, Campos e Botões
           child: ListView(
             children: [
               Text(labelTitle, style: Theme.of(context).textTheme.headline5),
@@ -56,17 +58,15 @@ class InventoryFormModal {
                   ),
                   const SizedBox(width: 16),
                   RedButton(
-                    text: (labelConfirmationButton),
+                    text: labelConfirmationButton,
                     onPressed: () async {
                       try {
                         Inventory inventory = Inventory(
-                          id: Uuid().v1(),
+                          id: model?.id ?? const Uuid().v1(),
                           name: nameController.text,
-                          quantity: int.parse(quantityController.text),
+                          quantity: int.parse(quantityController.text), // Convertendo para int
                           lastUpdated: DateTime.now(),
                         );
-                        print("Salvando no Firestore: ${inventory.toMap()}");
-                        // Salvar no Firestore bdFirebase
                         await bdFirebase
                             .collection("Estoque")
                             .doc(inventory.id)
@@ -87,3 +87,4 @@ class InventoryFormModal {
     );
   }
 }
+
