@@ -11,6 +11,6 @@ class AppColors {
   static const Color loginAppText = Color(0xFFFFFFFF);
   static const Color buttonColor = Color(0xFFAC0514);
   static const Color sideBarIcons = Color(0xFF2D0505);
-  static const Color sweepDeleteColor = Color(0xFFDE1616);
+  static const Color sweepDeleteColor = Color(0xABEC0303);
   static const Color deleteIconColor = Color(0xFFFFFFFF);
 }
