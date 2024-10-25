@@ -29,19 +29,28 @@ class _InventoryPageState extends State<InventoryPage> {
         title: const Text('Estoque'),
       ),
       drawer: const SideBar(),
-      body: (listInventory.isEmpty)
-          ? const Center(
-        child: Text(
-          'Você ainda não cadastrou produtos ao estoque!',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18),
+      body: (listInventory.isEmpty) ? Center(
+        child:Column(
+          mainAxisAlignment:MainAxisAlignment.center,
+          children: const [
+            Icon(
+              Icons.inventory_2_outlined,
+              size: 80
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Cadastre Itens ao Estoque!',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
         ),
       )
           : RefreshIndicator(
-        onRefresh: () {
-          return refresh();
-        },
-        child: ListView.builder(
+             onRefresh: () {
+               return refresh();
+              },
+          child: ListView.builder(
           itemCount: listInventory.length,
           itemBuilder: (context, index) {
             Inventory model = listInventory[index];
