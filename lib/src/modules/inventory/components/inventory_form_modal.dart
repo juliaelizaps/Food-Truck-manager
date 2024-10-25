@@ -6,7 +6,7 @@ import 'package:gf/src/modules/inventory/model/inventory_model.dart';
 
 class InventoryFormModal {
   static void showFormModal(BuildContext context, FirebaseFirestore bdFirebase, VoidCallback refresh, {Inventory? model}) {
-    String labelTitle = "Adicionar produto ao estoque";
+    String labelTitle = "Adicionar Item";
     String labelConfirmationButton = "Adicionar";
     String labelSkipButton = "Cancelar";
     TextEditingController nameController = TextEditingController();
@@ -35,7 +35,7 @@ class InventoryFormModal {
               Text(labelTitle, style: Theme.of(context).textTheme.headline5),
               TextFormField(
                 controller: nameController,
-                decoration: const InputDecoration(labelText: "Nome do Produto do Estoque"),
+                decoration: const InputDecoration(labelText: "Nome do Item"),
               ),
               const SizedBox(height: 16),
               TextFormField(
