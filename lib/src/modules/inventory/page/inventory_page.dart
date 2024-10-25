@@ -45,29 +45,67 @@ class _InventoryPageState extends State<InventoryPage> {
           itemCount: listInventory.length,
           itemBuilder: (context, index) {
             Inventory model = listInventory[index];
-            return Dismissible(
-              key: ValueKey<Inventory>(model),
-              direction: DismissDirection.endToStart,
-              background: Container(
-                color: AppColors.sweepDeleteColor,
-                alignment: Alignment.centerRight,
-                padding: const EdgeInsets.only(right: 8.0),
-                child: const Icon(
-                  Icons.delete_sweep,
-                  color: AppColors.deleteIconColor,
-                ) ,
-              ),
-              onDismissed: (direction){
-                remove(model);
-              },
-              child: ListTile(
-                onTap: () {
-                  //print('Clicou');
-                },
-                onLongPress: () => InventoryFormModal.showFormModal(context, bdFirebase, refresh, model: model),
-                leading: const Icon(Icons.inventory_outlined),
-                title: Text(model.name),
-                subtitle: Text('Quantidade: ${model.quantity} \nID: ${model.id} '),
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2.0),
+              child: ClipRRect(
+
+                borderRadius: BorderRadius.circular(5.0),
+                  child: Dismissible(
+                  key: ValueKey<Inventory>(model),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    color: AppColors.sweepDeleteColor,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 1.0),
+                    child: const Icon(
+                      Icons.delete_sweep,
+                      color: AppColors.deleteIconColor,
+                    ),
+                  ),
+                  onDismissed: (direction) {
+                    remove(model);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+                    padding: const EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 4,
+                          blurRadius: 30,
+                          offset: Offset(1, 6), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      onTap: () {
+                        // print('Clicou');
+                      },
+                      onLongPress: () => InventoryFormModal.showFormModal(context, bdFirebase, refresh, model: model),
+                      leading: const Icon(Icons.inventory_outlined),
+                      title: Text(
+                        model.name,
+                        style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold), // Ajustando o tamanho da fonte do nome
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Quantidade: ${model.quantity}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            'ID: ${model.id} ',
+                            style: TextStyle(fontSize: 10),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             );
           },
@@ -93,10 +131,8 @@ class _InventoryPageState extends State<InventoryPage> {
     });
   }
 
-  void remove(Inventory model){
+  void remove(Inventory model) {
     bdFirebase.collection('Estoque').doc(model.id).delete();
     refresh();
   }
-
 }
-
