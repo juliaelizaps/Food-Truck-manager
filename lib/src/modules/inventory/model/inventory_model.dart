@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Inventory {
   late final String id;
   final String name;
-  final int quantity;
+  late final int quantity;
   final DateTime lastUpdated;
 
   Inventory({

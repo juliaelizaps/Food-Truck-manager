@@ -3,28 +3,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Product {
   late final String id;
   final String name;
-  final int quantity;
   final DateTime lastUpdated;
+  final List<String> itemsIds;
 
   Product({
     required this.id,
     required this.name,
-    required this.quantity,
     required this.lastUpdated,
+    required this.itemsIds,
   });
 
   Product.fromMap(Map<String, dynamic> map)
       : id = map["id"],
         name = map["name"],
-        quantity = map["quantity"],
-        lastUpdated = (map["lastUpdated"] as Timestamp).toDate();
+        lastUpdated = (map["lastUpdated"] as Timestamp).toDate(),
+        itemsIds = List<String>.from(map["itemsIds"]);
 
   Map<String, dynamic> toMap() {
     return {
       "id": id,
       "name": name,
-      "quantity": quantity,
       'lastUpdated': Timestamp.fromDate(lastUpdated),
+      'itemsIds': itemsIds,
     };
   }
 }
