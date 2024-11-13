@@ -25,7 +25,7 @@ class _InitialPageState extends State<InitialPage>
   );
   void redirect(BuildContext context) {
     Timer(const Duration(seconds: 3), () async {
-      Navigator.of(context).pushReplacementNamed(AppRouter.home);
+      Navigator.of(context).pushReplacementNamed(AppRouter.login);
     });
   }
 

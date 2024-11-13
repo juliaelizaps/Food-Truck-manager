@@ -126,6 +126,10 @@ class _ProductPageState extends State<ProductPage> {
                                   'Itens: ${inventoryNames.values.join(', ')}',
                                   style: const TextStyle(fontSize: 16),
                                 ),
+                                Text(
+                                  'R\$${model['price'].toString()}',
+                                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.buttonColor,)
+                                )
                               ],
                             ),
                           ),
