@@ -12,12 +12,14 @@ class ProductFormModal {
     String labelConfirmationButton = "Adicionar";
     String labelSkipButton = "Cancelar";
     TextEditingController nameController = TextEditingController();
+    TextEditingController priceController =TextEditingController();
     List<DropdownMenuItem<String>> dropdownItems = [];
-    List<String> selectedItems = []; // Lista de IDs dos itens selecionados
+    List<String> selectedItems = [];
 
     if (model != null) {
       labelTitle = "Editar: ${model['name']}";
       nameController.text = model['name'];
+      priceController.text= model['price'].toString();
       selectedItems = List<String>.from(model['itemIds']);
       labelConfirmationButton = "Salvar Alterações";
     }
@@ -53,6 +55,12 @@ class ProductFormModal {
                     TextFormField(
                       controller: nameController,
                       decoration: const InputDecoration(labelText: "Nome do Produto"),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: priceController,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      decoration: const InputDecoration(labelText: "Preço"),
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
@@ -115,6 +123,7 @@ class ProductFormModal {
                               var newProduct = {
                                 'id': productId,
                                 'name': nameController.text,
+                                'price': double.parse(priceController.text.replaceAll(',', '.')),
                                 'itemIds': selectedItems,
                                 'lastUpdated': DateTime.now(),
                               };
@@ -124,7 +133,7 @@ class ProductFormModal {
                                }
                               refresh();
                             } catch (e) {
-                              //print("Erro ao salvar no Firestore: $e");
+                              print("Erro ao salvar no Firestore: $e");
                             }
                           },
                         ),
