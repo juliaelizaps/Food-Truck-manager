@@ -1,66 +1,57 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uuid/uuid.dart';
+import 'package:flutter/material.dart';
+import 'package:gf/src/modules/order/components/order_form_modal.dart';
+import 'package:gf/src/shared/colors/colors.dart';
+import '../../../shared/components/red_button.dart';
 import '../../../shared/components/sideBar.dart';
-import '../components/order_form_modal.dart';
+import '../../inventory/service/inventory_service.dart';
+import '../service/order_service.dart';
+import 'package:gf/src/modules/order/model/order_model.dart' as order_model;
 
-/*
 class OrderPage extends StatefulWidget {
-  const OrderPage({Key? key}) : super(key: key);
+  const OrderPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _OrderPageState createState() => _OrderPageState();
 }
 
 class _OrderPageState extends State<OrderPage> {
-  final FirebaseFirestore bdFirebase = FirebaseFirestore.instance;
-  final List<Map<String, dynamic>> cart = []; // Lista de produtos no carrinho
+  List<Map<String, dynamic>> cart = [];
+  FirebaseFirestore bdFirebase = FirebaseFirestore.instance;
   final TextEditingController commentController = TextEditingController();
+  final InventoryService inventoryService = InventoryService();
+  final OrderService orderService = OrderService();
 
-  void adicionarAoCarrinho(Map<String, dynamic> produto, String comentario, List<String> adicionais) {
+  @override
+  void initState() {
+    super.initState();
+    refresh();
+  }
+
+  Future<void> refresh() async {
+    setState(() {});
+  }
+
+  void addToCart(order_model.OrderProduct product, String comment, List<order_model.OrderProduct> additions) {
     setState(() {
-      cart.add({
-        'product': produto,
-        'comentario': comentario,
-        'adicionais': adicionais,
-      });
+      orderService.addToCart(
+        cart,
+        product,
+        comment,
+        additions,
+      );
     });
   }
 
-  double calcularTotal() {
-    double total = 0;
-    for (var item in cart) {
-      total += item['product']['price'];
-      // Adicione lógica para somar os preços dos adicionais, se necessário
-    }
-    return total;
+  double calculateTotal() {
+    return orderService.calculateTotal(cart);
   }
 
-  Future<void> confirmarPedido() async {
+  Future<void> confirmOrder() async {
     try {
-      for (var item in cart) {
-        var produto = item['product'];
-        List<String> itemIds = List<String>.from(produto['itemIds']);
-        for (var itemId in itemIds) {
-          int quantidade = 1; // Defina a quantidade conforme necessário
-          //await decrementarEstoque(bdFirebase, itemId, quantidade);
-        }
-      }
-
-      var orderId = Uuid().v1();
-      var newOrder = Order(
-        id: orderId,
-        comment: commentController.text, // Adiciona comentário ao pedido
-        products: cart,
-        total: calcularTotal(),
-        createdAt: DateTime.now(),
-      );
-      await bdFirebase.collection("Pedidos").doc(orderId).set(newOrder.toMap());
-
+      await orderService.confirmOrder(cart, commentController, inventoryService);
       setState(() {
         cart.clear();
-        commentController.clear(); // Limpa o campo de comentário
       });
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Pedido confirmado com sucesso!")));
@@ -73,54 +64,133 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pedidos"),
+        title: const Text('Pedidos'),
       ),
-      drawer: const SideBar(), // Adicionado o SideBar aqui
+      drawer: const SideBar(),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: cart.length,
-              itemBuilder: (context, index) {
-                var item = cart[index];
-                var produto = item['product'];
-                return ListTile(
-                  title: Text("${produto['name']} - R\$${produto['price']}"),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Comentário: ${item['comentario']}"),
-                      Text("Adicionais: ${item['adicionais'].join(', ')}"),
-                    ],
+            child: cart.isEmpty
+                ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.shopping_cart_outlined, size: 80),
+                  SizedBox(height: 10),
+                  Text(
+                    'Adicione Produtos ao Carrinho!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18),
                   ),
-                );
-              },
+                ],
+              ),
+            )
+                : RefreshIndicator(
+              onRefresh: refresh,
+              child: ListView.builder(
+                itemCount: cart.length,
+                itemBuilder: (context, index) {
+                  var item = cart[index];
+                  var product = item['product'];
+                  var adicionais = item['additional'] as List<Map<String, dynamic>>;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 2.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5.0),
+                      child: Dismissible(
+                        key: ValueKey<Map<String, dynamic>>(item),
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          color: AppColors.sweepDeleteColor,
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.only(right: 1.0),
+                          child: const Icon(Icons.delete, color: Colors.white),
+                        ),
+                        onDismissed: (direction) {
+                          setState(() {
+                            cart.removeAt(index);
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 30,
+                                offset: const Offset(1, 6),
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            title: Text(
+                              "${product['name']} - R\$${product['price']}",
+                              style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Observação      : ${item['comment']}",
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                Text(
+                                  "Adicionais: ${adicionais.map((adicional) => adicional['name']).join(', ')}",
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
-          Text("Total: R\$${calcularTotal()}"),
-          ElevatedButton(
-            onPressed: confirmarPedido,
-            child: Text("Confirmar Pedido"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(24),
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Total: R\$${calculateTotal()}",
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                          ),
+                          builder: (context) {
+                            return OrderFormModal(onAddToCart: addToCart);
+                          },
+                        );
+                      },
+                      backgroundColor: AppColors.buttonColor,
+                      child: const Icon(Icons.add_shopping_cart),
+                    ),
+                  ],
                 ),
-                builder: (context) {
-                  return OrderFormModal(onAddToCart: adicionarAoCarrinho);
-                },
-              );
-            },
-            child: Text("Adicionar Produto"),
+                const SizedBox(height: 26),
+                RedButton(
+                  onPressed: confirmOrder,
+                  text: 'Confirmar Pedido',
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 }
-*/
