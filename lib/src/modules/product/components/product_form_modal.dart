@@ -8,7 +8,7 @@ import 'package:gf/src/modules/inventory/model/inventory_model.dart';
 
 class ProductFormModal {
   static void showFormModal(BuildContext context, FirebaseFirestore bdFirebase, VoidCallback refresh, {Map<String, dynamic>? model}) {
-    String labelTitle = "Adicionar Produto";
+    String labelTitle = "Criar Produto";
     String labelConfirmationButton = "Adicionar";
     String labelSkipButton = "Cancelar";
     TextEditingController nameController = TextEditingController();
@@ -64,7 +64,7 @@ class ProductFormModal {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(labelText: "Selecionar Item do Estoque"),
+                      decoration: const InputDecoration(labelText: "Selecionar Item do Estoque (Obrigatório)"),
                       items: dropdownItems,
                       onChanged: (String? newValue) {
                         if (newValue != null && !selectedItems.contains(newValue)) {
@@ -76,8 +76,9 @@ class ProductFormModal {
                     ),
                     const SizedBox(height: 16),
                     if (selectedItems.isNotEmpty)
-                      Wrap(
-                        children: selectedItems.map((id) {
+                      Expanded(
+                        child: ListView(
+                        children:selectedItems.map((id) {
                           var itemName = dropdownItems.firstWhere((item) => item.value == id).child;
                           return Chip(
                             label: Text((itemName as Text).data!),
@@ -88,8 +89,9 @@ class ProductFormModal {
                             },
                           );
                         }).toList(),
+                        ),
                       ),
-                    const Spacer(),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -110,8 +112,6 @@ class ProductFormModal {
                           onPressed: () async {
                             try {
                               String productId = model?['id'] ?? const Uuid().v1();
-
-                              // Verifica se algum item foi selecionado
                               if (selectedItems.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text("Selecione pelo menos um item do estoque")),
