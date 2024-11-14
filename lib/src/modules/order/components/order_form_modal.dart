@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gf/src/modules/order/model/order_model.dart' as order_model;
 
 class OrderFormModal extends StatefulWidget {
-  final Function(Map<String, dynamic>, String, List<String>) onAddToCart;
+  final Function(order_model.OrderProduct, String, List<order_model.OrderProduct>) onAddToCart;
 
-  OrderFormModal({required this.onAddToCart});
+  const OrderFormModal({required this.onAddToCart});
 
   @override
   _OrderFormModalState createState() => _OrderFormModalState();
 }
 
 class _OrderFormModalState extends State<OrderFormModal> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String comentarioProduto = "";
-  List<String> adicionaisProduto = [];
-  String? produtoSelecionado;
+  List<order_model.OrderProduct> adicionaisProduto = [];
+  order_model.OrderProduct? produtoSelecionado;
+  List<order_model.OrderProduct> produtos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchProdutos();
+  }
+
+  Future<void> fetchProdutos() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore.collection('Produtos').get();
+    setState(() {
+      produtos = snapshot.docs.map((doc) => order_model.OrderProduct.fromMap(doc.data()!)).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +39,15 @@ class _OrderFormModalState extends State<OrderFormModal> {
       child: Column(
         children: [
           Text("Adicionar Produto", style: Theme.of(context).textTheme.headline5),
-          DropdownButtonFormField<String>(
+          DropdownButtonFormField<order_model.OrderProduct>(
             decoration: const InputDecoration(labelText: "Selecionar Produto"),
-            items: [
-              DropdownMenuItem<String>(
-                value: "produto1",
-                child: Text("Produto 1"),
-              ),
-              DropdownMenuItem<String>(
-                value: "produto2",
-                child: Text("Produto 2"),
-              ),
-            ],
-            onChanged: (String? newValue) {
+            items: produtos.map((produto) {
+              return DropdownMenuItem<order_model.OrderProduct>(
+                value: produto,
+                child: Text(produto.name),
+              );
+            }).toList(),
+            onChanged: (newValue) {
               setState(() {
                 produtoSelecionado = newValue;
               });
@@ -42,7 +55,7 @@ class _OrderFormModalState extends State<OrderFormModal> {
           ),
           const SizedBox(height: 16),
           TextFormField(
-            decoration: const InputDecoration(labelText: "Comentário"),
+            decoration: const InputDecoration(labelText: "Observação"),
             onChanged: (value) {
               setState(() {
                 comentarioProduto = value;
@@ -50,13 +63,35 @@ class _OrderFormModalState extends State<OrderFormModal> {
             },
           ),
           const SizedBox(height: 16),
-          TextFormField(
-            decoration: const InputDecoration(labelText: "Adicionais"),
-            onChanged: (value) {
-              setState(() {
-                adicionaisProduto = value.split(',').map((item) => item.trim()).toList();
-              });
+          DropdownButtonFormField<String>(
+            decoration: const InputDecoration(labelText: "Selecionar Adicional"),
+            items: produtos.map((produto) {
+              return DropdownMenuItem<String>(
+                value: produto.id,
+                child: Text(produto.name),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              if (newValue != null && !adicionaisProduto.any((produto) => produto.id == newValue)) {
+                setState(() {
+                  var matchedProduct = produtos.firstWhere((produto) => produto.id == newValue);
+                  adicionaisProduto.add(matchedProduct);
+                });
+              }
             },
+          ),
+          const SizedBox(height: 16),
+          Wrap(
+            children: adicionaisProduto.map((produto) {
+              return Chip(
+                label: Text(produto.name),
+                onDeleted: () {
+                  setState(() {
+                    adicionaisProduto.remove(produto);
+                  });
+                },
+              );
+            }).toList(),
           ),
           const Spacer(),
           Row(
@@ -66,20 +101,20 @@ class _OrderFormModalState extends State<OrderFormModal> {
                 onPressed: () {
                   if (produtoSelecionado != null) {
                     widget.onAddToCart(
-                      {'name': produtoSelecionado, 'price': 10.0, 'itemIds': ['item1']},
+                      produtoSelecionado!,
                       comentarioProduto,
                       adicionaisProduto,
                     );
                     Navigator.pop(context);
                   }
                 },
-                child: Text("Adicionar ao Carrinho"),
+                child: const Text("Adicionar ao Carrinho"),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Cancelar"),
+                child: const Text("Cancelar"),
               ),
             ],
           ),
