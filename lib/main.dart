@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gf/src/modules/home/page/home_page.dart';
+import 'package:gf/src/modules/Account/page/account_page.dart';
 import 'package:gf/src/shared/colors/colors.dart';
 import 'src/modules/dashboard/page/dashboard_page.dart';
 import 'src/modules/history/page/history_page.dart';
@@ -40,7 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         AppRouter.login: (context) => const LoginPage(),
-        AppRouter.home: (context) => const HomePage(),
+        AppRouter.home: (context) => const AccountPage(),
         AppRouter.dashboard: (context) => const DashboardPage(),
         AppRouter.product: (context) => const ProductPage(),
         AppRouter.orders: (context) => const OrderPage(),

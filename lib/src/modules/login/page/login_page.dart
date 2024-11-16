@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   // void _simularCriarUsuario(
   //     {required String email, required String senha, required String nome}) {
   //   print("Usuário criado: Email: $email, Senha: $senha, Nome: $nome");
-  //   Navigator.of(context).pushReplacementNamed(AppRouter.home);
+  //   Navigator.of(context).pushReplacementNamed(AppRouter.Account);
   // }
 
   @override
