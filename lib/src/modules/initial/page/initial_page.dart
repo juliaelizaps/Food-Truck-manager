@@ -5,6 +5,8 @@ import 'package:gf/src/shared/colors/colors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../login/routes/auth_router.dart';
+
 class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
 
@@ -21,11 +23,16 @@ class _InitialPageState extends State<InitialPage>
 
   late final Animation<double> _animation = CurvedAnimation(
     parent: _controller,
-    curve: Curves.elasticOut,
+
+    curve: Curves.easeIn,
   );
   void redirect(BuildContext context) {
-    Timer(const Duration(seconds: 3), () async {
-      Navigator.of(context).pushReplacementNamed(AppRouter.login);
+    Timer(const Duration(seconds: 3), () {
+      //Navigator.of(context).pushReplacementNamed(AppRouter.login);
+      //const AuthRouter();
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => AuthRouter())
+      );
     });
   }
 

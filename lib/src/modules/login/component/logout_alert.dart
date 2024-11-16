@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../routes/app_routes.dart';
+import '../../../routes/app_routes.dart';
 
 class LogoutWidget {
   static void showLogoutDialog(BuildContext context) {

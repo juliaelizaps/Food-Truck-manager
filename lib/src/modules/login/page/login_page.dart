@@ -6,6 +6,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../../routes/app_routes.dart';
 import '../../../shared/components/red_button.dart';
 import '../controller/password_visibility_controller.dart';
+import '../routes/auth_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -352,7 +353,8 @@ class _LoginPageState extends State<LoginPage> {
         email: email, senha: senha).then((String? error) => {
       if(error ==null){
         showSnackBar(context: context, message: 'Usuário logado com sucesso', isError: false),
-        Navigator.of(context).pushReplacementNamed(AppRouter.home)
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const AuthRouter()))
       } else{
         showSnackBar(context: context, message: error)
       }
@@ -365,7 +367,8 @@ class _LoginPageState extends State<LoginPage> {
         email: email, senha: senha, nome:nome).then((String? error) => {
     if (error==null){
         showSnackBar(context: context, message: 'Conta criada com sucesso!', isError: false),
-        Navigator.of(context).pushReplacementNamed(AppRouter.home)
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const AuthRouter()))
     }else{
     showSnackBar(context: context, message: error)
     }

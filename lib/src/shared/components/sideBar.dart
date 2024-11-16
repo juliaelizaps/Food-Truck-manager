@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../routes/app_routes.dart';
 import '../colors/colors.dart';
-import '../../ widgets/logout_alert.dart';
+import '../../modules/login/component/logout_alert.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
