@@ -57,8 +57,8 @@ class SideBar extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.home, color: AppColors.sideBarIcons),
-              title: const Text('Home'),
+              leading: const Icon(Icons.account_circle, color: AppColors.sideBarIcons),
+              title: const Text('Conta'),
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(AppRouter.home);
               },

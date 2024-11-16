@@ -8,14 +8,14 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Conta'),
         actions: [],
       ),
       drawer:const SideBar(),
       body: const SizedBox(
         child: Center(
           child: Text(
-            'Home',
+            'Conta',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
