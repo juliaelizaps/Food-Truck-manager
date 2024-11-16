@@ -30,7 +30,7 @@ class _OrderFormModalState extends State<OrderFormModal> {
   Future<void> fetchProdutos() async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore.collection('Produtos').get();
     setState(() {
-      products = snapshot.docs.map((doc) => order_model.OrderProduct.fromMap(doc.data()!)).toList();
+      products = snapshot.docs.map((doc) => order_model.OrderProduct.fromMap(doc.data())).toList();
     });
   }
 

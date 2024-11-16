@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gf/src/modules/login/component/show_snackbar.dart';
+import 'package:gf/src/modules/login/services/auth_service.dart';
 import 'package:gf/src/shared/colors/colors.dart';
-import '../../../routes/app_routes.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../../routes/app_routes.dart';
 import '../../../shared/components/red_button.dart';
 import '../controller/password_visibility_controller.dart';
 
@@ -20,13 +22,14 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
   bool isEntrando = true;
+  AuthService authService = AuthService();
 
-  // Simular criação de usuário para teste
-  void _simularCriarUsuario(
-      {required String email, required String senha, required String nome}) {
-    print("Usuário criado: Email: $email, Senha: $senha, Nome: $nome");
-    Navigator.of(context).pushReplacementNamed(AppRouter.home);
-  }
+  // Simular criação de usuário (entra para teste somente)
+  // void _simularCriarUsuario(
+  //     {required String email, required String senha, required String nome}) {
+  //   print("Usuário criado: Email: $email, Senha: $senha, Nome: $nome");
+  //   Navigator.of(context).pushReplacementNamed(AppRouter.home);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -176,8 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                                           obscureText: obscureText,
                                           decoration: InputDecoration(
                                             hintText: "Senha",
-                                            hintStyle:
-                                                TextStyle(color: Colors.grey),
+                                            hintStyle:const TextStyle(color: Colors.grey),
                                             border: InputBorder.none,
                                             suffixIcon: IconButton(
                                               icon: Icon(
@@ -255,7 +257,7 @@ class _LoginPageState extends State<LoginPage> {
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {
-                                                return "Insira um nome maior.";
+                                                return "Insira um nome.";
                                               }
                                               return null;
                                             },
@@ -271,15 +273,19 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              //Adicionar aqui o caminho para página recuperar a senha
-                            },
-                            child: FadeInUp(
-                              duration: const Duration(milliseconds: 1500),
-                              child: const Text(
-                                "Esqueceu a senha?",
-                                style: TextStyle(color: Colors.blueAccent),
+                          Visibility(
+                            visible: isEntrando,
+                            child: GestureDetector(
+                              onTap: () {
+                                forgotPasswordClicked();
+                                //print('Esqueci a senha clicado!!!!');
+                              },
+                              child: FadeInUp(
+                                duration: const Duration(milliseconds: 1500),
+                                child: const Text(
+                                  "Esqueceu a senha?",
+                                  style: TextStyle(color: Colors.blueAccent),
+                                ),
                               ),
                             ),
                           ),
@@ -293,12 +299,12 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   if (isEntrando) {
-                                    _entrarUsuario(
+                                    _enterUser(
                                       email: _emailController.text,
                                       senha: _senhaController.text,
                                     );
                                   } else {
-                                    _criarUsuario(
+                                    _createUser(
                                       email: _emailController.text,
                                       senha: _senhaController.text,
                                       nome: _nomeController.text,
@@ -316,7 +322,6 @@ class _LoginPageState extends State<LoginPage> {
                                 setState(() {
                                   isEntrando = !isEntrando;
                                 });
-                                // Reiniciar a validação do formulário para evitar erros
                                 _formKey.currentState?.reset();
                               },
                               child: Text(
@@ -342,18 +347,61 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _entrarUsuario({required String email, required String senha}) {
-    print("Entrar usuário $email, $senha");
+  void _enterUser({required String email, required String senha}) {
+    authService.enterUser(
+        email: email, senha: senha).then((String? error) => {
+      if(error ==null){
+        showSnackBar(context: context, message: 'Usuário logado com sucesso', isError: false),
+        Navigator.of(context).pushReplacementNamed(AppRouter.home)
+      } else{
+        showSnackBar(context: context, message: error)
+      }
+    }
+    );
   }
-  // retirar comentario abaixo quando conectar no autenticador
-  // void _criarUsuario(
-  //     {required String email, required String senha, required String nome}) {
-  //   print("Criar usuário $email, $senha, $nome");
-  // }
 
-  //criado para teste:
-  void _criarUsuario(
-      {required String email, required String senha, required String nome}) {
-    _simularCriarUsuario(email: email, senha: senha, nome: nome);
+  void _createUser({required String email, required String senha, required String nome}) {
+    authService.createUser(
+        email: email, senha: senha, nome:nome).then((String? error) => {
+    if (error==null){
+        showSnackBar(context: context, message: 'Conta criada com sucesso!', isError: false),
+        Navigator.of(context).pushReplacementNamed(AppRouter.home)
+    }else{
+    showSnackBar(context: context, message: error)
+    }
+    });
+
+  }
+
+  forgotPasswordClicked(){
+    String email= _emailController.text;
+    showDialog(
+        context: context,
+        builder:(context){
+          TextEditingController redefiningPasswordController =
+          TextEditingController(text: email);
+          return AlertDialog(
+            title: const Text('Confirmar o email para redefinir senha'),
+            content: TextFormField (controller: redefiningPasswordController,decoration: const InputDecoration(label: Text('Confime o email')),
+            ),
+            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            actions: [
+              RedButton(
+                text: 'Redefinir senha',
+                onPressed: (){
+                  authService.redefinePassword(email: redefiningPasswordController.text).then((String? error) {
+                    if(error == null){
+                      showSnackBar(context: context, message: 'Email de redefinição de senha enviado.', isError: false,
+                      );
+                    } else{
+                      showSnackBar(context: context, message: error);
+                    }
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+      );
+    });
   }
 }

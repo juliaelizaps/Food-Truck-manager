@@ -13,4 +13,6 @@ class AppColors {
   static const Color sideBarIcons = Color(0xFF2D0505);
   static const Color sweepDeleteColor = Color(0xABEC0303);
   static const Color deleteIconColor = Color(0xFFFFFFFF);
+  static const Color snackBarError = Color(0xFFFC0404);
+  static const Color snackBarSuccess = Color(0xFF5DD90E);
 }
