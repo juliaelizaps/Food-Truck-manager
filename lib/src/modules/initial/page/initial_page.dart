@@ -28,10 +28,8 @@ class _InitialPageState extends State<InitialPage>
   );
   void redirect(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
-      //Navigator.of(context).pushReplacementNamed(AppRouter.login);
-      //const AuthRouter();
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => AuthRouter())
+          MaterialPageRoute(builder: (context) => const AuthRouter())
       );
     });
   }

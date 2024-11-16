@@ -100,7 +100,7 @@ class SideBar extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.logout, color: AppColors.sideBarIcons),
-              title: const Text('Logout'),
+              title: const Text('Sair'),
               onTap: () {
                 LogoutWidget.showLogoutDialog(context);
               },

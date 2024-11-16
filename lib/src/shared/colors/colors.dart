@@ -15,4 +15,5 @@ class AppColors {
   static const Color deleteIconColor = Color(0xFFFFFFFF);
   static const Color snackBarError = Color(0xFFFC0404);
   static const Color snackBarSuccess = Color(0xFF5DD90E);
+  static const Color userIcon = Color(0xFFA7A7C9);
 }

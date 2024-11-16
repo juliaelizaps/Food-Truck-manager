@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gf/src/modules/login/services/auth_service.dart';
 import '../../../routes/app_routes.dart';
 
 class LogoutWidget {
@@ -17,8 +18,10 @@ class LogoutWidget {
               child: const Text('Cancelar'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
+                await AuthService().logout();
                 Navigator.of(context).pushReplacementNamed(AppRouter.login);
+
               },
               child: const Text('Sim'),
             ),

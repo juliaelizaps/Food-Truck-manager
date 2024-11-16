@@ -364,7 +364,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _createUser({required String email, required String senha, required String nome}) {
     authService.createUser(
-        email: email, senha: senha, nome:nome).then((String? error) => {
+        email: email, password: senha, name:nome).then((String? error) => {
     if (error==null){
         showSnackBar(context: context, message: 'Conta criada com sucesso!', isError: false),
     Navigator.of(context).pushReplacement(
