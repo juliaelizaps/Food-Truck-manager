@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gf/src/modules/login/component/show_snackbar.dart';
+import 'package:gf/src/modules/login/components/show_snackbar.dart';
 import 'package:gf/src/modules/login/services/auth_service.dart';
 import 'package:gf/src/shared/colors/colors.dart';
 import 'package:animate_do/animate_do.dart';

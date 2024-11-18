@@ -5,7 +5,7 @@ import 'package:gf/src/shared/colors/colors.dart';
 import '../../../shared/components/red_button.dart';
 import '../../../shared/components/sideBar.dart';
 import '../../inventory/service/inventory_service.dart';
-import '../service/order_service.dart';
+import '../services/order_service.dart';
 import 'package:gf/src/modules/order/model/order_model.dart' as order_model;
 
 class OrderPage extends StatefulWidget {
