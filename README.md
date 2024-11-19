@@ -1,8 +1,50 @@
-# Gerencie
+# GERENCIE
 
-Gerencie é um App feito em Flutter, criado para ajudar o gerencimento de vendas e de estoque de Food Trucks.
+O aplicativo "GERENCIE" foi desenvolvido com o objetivo de auxiliar atendentes e proprietários de food trucks a gerenciarem suas vendas e controlarem seus estoques de maneira mais eficiente. Com essa ferramenta, esperamos facilitar o dia a dia desses profissionais, proporcionando um meio rápido e eficaz de administrar seus negócios.
 
-## Pré-requisitos de como iniciar o projeto:
+## Introdução
+
+Atualmente, o Food Truck do Sr. Elpídio, em Guaramirim - SC, registra suas vendas manualmente, o que gera problemas de precisão, eficiência e controle financeiro. Com o aumento da demanda, é necessária uma solução para modernizar o processo de vendas e estoque, tornando-o mais ágil e preciso, sem complicar o uso ou gerar custos elevados.
+
+## Descrição do Projeto
+
+O projeto GERENCIE tem como desafio entregar um aplicativo voltado para o gerenciamento das vendas e de estoque de food trucks. Este documento visa apresentar as principais telas e funcionalidades do software, bem como os métodos e materiais utilizados em seu desenvolvimento.
+
+## Resultados
+
+As principais telas e funcionalidades do software são:
+
+- Tela de Estoque
+- Tela de Produtos
+- Tela de Pedidos
+- Histórico de Vendas
+- Dashboard
+
+Imagens dessas telas podem ser encontradas na seção de **Discussão e Resultados** deste documento.
+
+## Materiais e Métodos
+
+Para o desenvolvimento do aplicativo, foram utilizadas as seguintes tecnologias:
+
+- **Flutter**: Framework para desenvolvimento de aplicativos
+- **Firebase (Cloud Firestore)**: Backend para armazenamento de dados
+- **Trello**: Organização de tarefas
+- **Figma**: Prototipação de interfaces
+- **Slack**: Comunicação entre a equipe
+
+Além disso, elaboramos diagramas UML, como casos de uso, entidade e relacionamento, classes e atividades, para mapear e estruturar os processos do sistema de forma clara e organizada.
+
+"A adoção de metodologias ágeis exige adaptações culturais e processuais para alcançar eficiência e valor."
+
+## Considerações Finais
+
+O aplicativo "GERENCIE" visa solucionar os problemas de precisão, eficiência e controle financeiro enfrentados por food trucks como o do Sr. Elpídio, proporcionando uma ferramenta moderna e acessível para a gestão de vendas e estoque.
+
+## Referências
+
+O desenvolvimento do projeto seguiu boas práticas e metodologias ágeis, conforme citado anteriormente.
+
+## Pré-requisitos
 
 Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 
@@ -15,29 +57,14 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 
 Siga os passos abaixo para configurar e iniciar o projeto:
 
-### 1. Clone o repositório
+1. **Clone o repositório**
 
-clone: https://github.com/juliaelizaps/Food-Truck-manager
+```bash
+git clone https://github.com/juliaelizaps/Food-Truck-manager
+Inicie o projeto
 
-### 2. Iniciando o projeto
+Depois de clonar o repositório e abri-lo no Android Studio, execute:
 
-Depois de clonar o repositório e abri-lo no Android Studio:
-- pub get (pubspec.yaml)
-- flutter run (terminal)
-
-### 3. Fork este repositório.
-
-Siga a UI do Projeto: https://www.figma.com/design/Q9kNFXt6S1nII137fVKRay/App-UI-Flutter?node-id=0-1&m=dev&t=mMfdEX7jhYPDBG30-1
-
-Link do Trello: https://trello.com/b/1yZi1wnn/food-truck
-
-Crie uma branch para sua feature (git checkout -b feature/nome-da-feature).
-
-### 3. Abra um Pull Request.
-
-Commit suas mudanças (git commit -m 'Adiciona nova feature').
-
-Push para a branch (git push origin feature/nome-da-feature).
-
-
-
+bash
+flutter pub get
+flutter 
