@@ -34,7 +34,7 @@ Para o desenvolvimento do aplicativo, foram utilizadas as seguintes tecnologias:
 
 ## Telas principais
 
-<img src="/assets/readme/telas.png">
+<img src="/assets/images/telas.png">
 
 Além disso, elaboramos diagramas UML, como casos de uso, entidade e relacionamento, classes e atividades, para mapear e estruturar os processos do sistema de forma clara e organizada.
 
