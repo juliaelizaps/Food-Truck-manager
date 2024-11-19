@@ -32,6 +32,10 @@ Para o desenvolvimento do aplicativo, foram utilizadas as seguintes tecnologias:
 - **Figma**: Prototipação de interfaces
 - **Slack**: Comunicação entre a equipe
 
+## Telas principais
+
+<img src="/assets/readme/telas.png">
+
 Além disso, elaboramos diagramas UML, como casos de uso, entidade e relacionamento, classes e atividades, para mapear e estruturar os processos do sistema de forma clara e organizada.
 
 "A adoção de metodologias ágeis exige adaptações culturais e processuais para alcançar eficiência e valor."
@@ -63,8 +67,8 @@ Siga os passos abaixo para configurar e iniciar o projeto:
 git clone https://github.com/juliaelizaps/Food-Truck-manager
 Inicie o projeto
 
-Depois de clonar o repositório e abri-lo no Android Studio, execute:
+2.Depois de clonar o repositório e abri-lo no Android Studio, execute:
 
-bash
+```bash
 flutter pub get
 flutter 
