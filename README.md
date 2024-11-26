@@ -34,7 +34,7 @@ Para o desenvolvimento do aplicativo, foram utilizadas as seguintes tecnologias:
 
 ## Telas principais
 
-<img src="/assets/readme/telas.png">
+<img src="/assets/images/telas.png">
 
 Além disso, elaboramos diagramas UML, como casos de uso, entidade e relacionamento, classes e atividades, para mapear e estruturar os processos do sistema de forma clara e organizada.
 
@@ -66,9 +66,21 @@ Siga os passos abaixo para configurar e iniciar o projeto:
 ```bash
 git clone https://github.com/juliaelizaps/Food-Truck-manager
 Inicie o projeto
-
+```
 2.Depois de clonar o repositório e abri-lo no Android Studio, execute:
 
 ```bash
 flutter pub get
-flutter 
+flutter run 
+```
+## Utilização com banco de dados em nuvem
+   
+1. Crie uma conta no Firebase
+   
+2.  Conecte o aplicativo a sua conta Firebase
+
+link Figma: https://www.figma.com/design/Q9kNFXt6S1nII137fVKRay/App-UI-Flutter?node-id=0-1&node-type=canvas&t=lBKJTdlTtBkHEHuO-0
+ 
+- [Documentação Firebase](https://firebase.google.com/docs/cli?hl=pt&authuser=0&_gl=1*1wdcabl*_ga*MTYyODM3Mjk5OC4xNzI5NjI5OTQy*_ga_CW55HF8NVT*MTcyOTYzMjY1NS4yLjEuMTcyOTYzMzcxMy42MC4wLjA.#windows-npm)
+
+##  Aproveite o App GERENCIE!
