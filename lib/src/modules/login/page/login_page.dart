@@ -25,13 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   bool isEntrando = true;
   AuthService authService = AuthService();
 
-  // Simular criação de usuário (entra para teste somente)
-  // void _simularCriarUsuario(
-  //     {required String email, required String senha, required String nome}) {
-  //   print("Usuário criado: Email: $email, Senha: $senha, Nome: $nome");
-  //   Navigator.of(context).pushReplacementNamed(AppRouter.Account);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

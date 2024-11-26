@@ -5,7 +5,11 @@ import '../../inventory/service/inventory_service.dart';
 import 'package:gf/src/modules/order/model/order_model.dart' as order_model;
 
 class OrderService {
-  final FirebaseFirestore bdFirebase = FirebaseFirestore.instance;
+  late FirebaseFirestore bdFirebase;
+
+  OrderService({FirebaseFirestore? firestore}){
+    (firestore != null)? this.bdFirebase = firestore: this.bdFirebase = FirebaseFirestore.instance;
+  }
 
   Future<void> addToCart(
       List<Map<String, dynamic>> cart,
@@ -48,7 +52,7 @@ class OrderService {
       }
     }
 
-    var orderId = Uuid().v1();
+    var orderId = const Uuid().v1();
     var newOrder = order_model.Order(
       id: orderId,
       comment: commentController.text,
