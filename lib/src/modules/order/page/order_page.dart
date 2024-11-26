@@ -135,7 +135,7 @@ class _OrderPageState extends State<OrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Observação      : ${item['comment']}",
+                                  "Observação: ${item['comment']}",
                                   style: const TextStyle(fontSize: 16),
                                 ),
                                 Text(

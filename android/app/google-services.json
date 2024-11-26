@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "535611524508",
-    "project_id": "gerencie-b058a",
-    "storage_bucket": "gerencie-b058a.appspot.com"
+    "project_number": "462898727054",
+    "project_id": "teste-61172",
+    "storage_bucket": "teste-61172.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:535611524508:android:1325a60ccd17034ad87459",
+        "mobilesdk_app_id": "1:462898727054:android:fb304532d4841f0e6ee1df",
         "android_client_info": {
           "package_name": "com.example.gf"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBxAJjFl9GqMfUeqyB_ojgWsW0Eocv4Jwc"
+          "current_key": "AIzaSyAHyx0NxuRCpTxLxokQvGU4vH2hqYtg9Ts"
         }
       ],
       "services": {

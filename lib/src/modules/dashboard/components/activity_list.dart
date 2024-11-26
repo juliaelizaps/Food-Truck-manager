@@ -12,9 +12,9 @@ class ActivityList extends StatelessWidget {
       itemCount: 5,
       itemBuilder: (context, index) {
         return ListTile(
-          leading: CircleAvatar(
+          leading: const CircleAvatar(
             backgroundColor: AppColors.initialPageBackground,
-            child: const Icon(Icons.event, color: Colors.white),
+            child: Icon(Icons.event, color: Colors.white),
           ),
           title: Text('Atividade ${index + 1}'),
           subtitle: Text('Detalhes da atividade ${index + 1}'),

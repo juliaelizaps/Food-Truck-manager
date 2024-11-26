@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDzDpszUxn4NDDJv6756rZIPiSrsWxCqa0',
-    appId: '1:535611524508:web:7dde156684f34817d87459',
-    messagingSenderId: '535611524508',
-    projectId: 'gerencie-b058a',
-    authDomain: 'gerencie-b058a.firebaseapp.com',
-    storageBucket: 'gerencie-b058a.appspot.com',
-    measurementId: 'G-V6C4JX8XDL',
+    apiKey: 'AIzaSyCGd76iVavpA7BeRHPkz13-t2bZplu7KnI',
+    appId: '1:462898727054:web:0be8c0008e84ee836ee1df',
+    messagingSenderId: '462898727054',
+    projectId: 'teste-61172',
+    authDomain: 'teste-61172.firebaseapp.com',
+    storageBucket: 'teste-61172.firebasestorage.app',
+    measurementId: 'G-JDDHBZRQYQ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBxAJjFl9GqMfUeqyB_ojgWsW0Eocv4Jwc',
-    appId: '1:535611524508:android:1325a60ccd17034ad87459',
-    messagingSenderId: '535611524508',
-    projectId: 'gerencie-b058a',
-    storageBucket: 'gerencie-b058a.appspot.com',
+    apiKey: 'AIzaSyAHyx0NxuRCpTxLxokQvGU4vH2hqYtg9Ts',
+    appId: '1:462898727054:android:fb304532d4841f0e6ee1df',
+    messagingSenderId: '462898727054',
+    projectId: 'teste-61172',
+    storageBucket: 'teste-61172.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCaJgi-zWmSDTN0inqoXBnkzg-ZgJtjUyw',
-    appId: '1:535611524508:ios:a1131110c94802fcd87459',
-    messagingSenderId: '535611524508',
-    projectId: 'gerencie-b058a',
-    storageBucket: 'gerencie-b058a.appspot.com',
+    apiKey: 'AIzaSyDvwL7yq9wgWdoKF-g3cVCUjqFkcpcDQ6w',
+    appId: '1:462898727054:ios:401ed3cf1c26f7e86ee1df',
+    messagingSenderId: '462898727054',
+    projectId: 'teste-61172',
+    storageBucket: 'teste-61172.firebasestorage.app',
     iosBundleId: 'com.example.gf',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCaJgi-zWmSDTN0inqoXBnkzg-ZgJtjUyw',
-    appId: '1:535611524508:ios:a1131110c94802fcd87459',
-    messagingSenderId: '535611524508',
-    projectId: 'gerencie-b058a',
-    storageBucket: 'gerencie-b058a.appspot.com',
+    apiKey: 'AIzaSyDvwL7yq9wgWdoKF-g3cVCUjqFkcpcDQ6w',
+    appId: '1:462898727054:ios:401ed3cf1c26f7e86ee1df',
+    messagingSenderId: '462898727054',
+    projectId: 'teste-61172',
+    storageBucket: 'teste-61172.firebasestorage.app',
     iosBundleId: 'com.example.gf',
   );
 }
