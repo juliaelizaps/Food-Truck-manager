@@ -64,7 +64,7 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pedidos'),
+        title: const Text('Novo Pedido'),
       ),
       drawer: const SideBar(),
       body: Column(

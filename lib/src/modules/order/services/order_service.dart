@@ -8,7 +8,7 @@ class OrderService {
   late FirebaseFirestore bdFirebase;
 
   OrderService({FirebaseFirestore? firestore}){
-    (firestore != null)? this.bdFirebase = firestore: this.bdFirebase = FirebaseFirestore.instance;
+    (firestore != null)? bdFirebase = firestore : bdFirebase = FirebaseFirestore.instance;
   }
 
   Future<void> addToCart(
@@ -56,7 +56,11 @@ class OrderService {
     var newOrder = order_model.Order(
       id: orderId,
       comment: commentController.text,
-      products: cart.map((item) => order_model.OrderProduct.fromMap(item['product'])).toList(),
+      products: cart.map((item) => order_model.OrderProduct.fromMap({
+        ...item['product'],
+        'comment': item['comment'],
+        'additions': item['additions'],
+      })).toList(),
       total: calculateTotal(cart),
       createdAt: DateTime.now(),
     );

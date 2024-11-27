@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gf/src/modules/Account/page/account_page.dart';
+import 'package:gf/src/modules/List/page/list_page.dart';
+import 'package:gf/src/modules/history/pages/order_history_page.dart';
 import 'package:gf/src/shared/colors/colors.dart';
 import 'src/modules/dashboard/page/dashboard_page.dart';
-import 'src/modules/history/page/history_page.dart';
+import 'src/modules/List/page/list_page.dart';
 import 'src/modules/initial/page/initial_page.dart';
 import 'src/modules/inventory/page/inventory_page.dart';
 import 'src/modules/login/page/login_page.dart';
@@ -43,7 +45,8 @@ class MyApp extends StatelessWidget {
         AppRouter.dashboard: (context) => const DashboardPage(),
         AppRouter.product: (context) => const ProductPage(),
         AppRouter.orders: (context) => const OrderPage(),
-        //AppRouter.history: (context) => const HistoryPage(),
+        AppRouter.list: (context) => const ListPage(),
+        AppRouter.history: (context) => const HistoryPage(),
         AppRouter.inventory: (context) => const InventoryPage(),
       },
     );

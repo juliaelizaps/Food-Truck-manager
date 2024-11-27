@@ -39,23 +39,32 @@ class OrderProduct {
   final String id;
   final String name;
   final double price;
+  final String comment;
+  final List<Map<String, dynamic>> additions;
 
   OrderProduct({
     required this.id,
     required this.name,
     required this.price,
+    required this.comment,
+    required this.additions,
   });
 
   OrderProduct.fromMap(Map<String, dynamic> map)
       : id = map["id"],
         name = map["name"],
-        price = map["price"];
+        price = map["price"],
+        comment = map["comment"]?? '',
+        additions = List<Map<String, dynamic>>.from(map["additions"] ?? []);
 
   Map<String, dynamic> toMap() {
     return {
       "id": id,
       "name": name,
       "price": price,
+      "comment": comment,
+      "additions": additions,
     };
   }
 }
+

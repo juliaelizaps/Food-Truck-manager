@@ -71,6 +71,13 @@ class SideBar extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: const Icon(Icons.inventory, color: AppColors.sideBarIcons),
+              title: const Text('Estoque'),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed(AppRouter.inventory);
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.shopping_bag, color: AppColors.sideBarIcons),
               title: const Text('Produtos'),
               onTap: () {
@@ -79,23 +86,23 @@ class SideBar extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.receipt, color: AppColors.sideBarIcons),
-              title: const Text('Pedidos'),
+              title: const Text('Novo Pedido'),
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(AppRouter.orders);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.history, color: AppColors.sideBarIcons),
-              title: const Text('Histórico de Pedidos'),
+              leading: const Icon(Icons.list, color: AppColors.sideBarIcons),
+              title: const Text('Lista de Pedidos'),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(AppRouter.history);
+                Navigator.of(context).pushReplacementNamed(AppRouter.list);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.inventory, color: AppColors.sideBarIcons),
-              title: const Text('Estoque'),
+              leading: const Icon(Icons.history, color: AppColors.sideBarIcons),
+              title: const Text('Histórico'),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(AppRouter.inventory);
+                Navigator.of(context).pushReplacementNamed(AppRouter.history);
               },
             ),
             ListTile(
