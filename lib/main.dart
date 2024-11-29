@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gf/src/modules/Account/page/account_page.dart';
 import 'package:gf/src/modules/List/page/list_page.dart';
-import 'package:gf/src/modules/history/pages/order_history_page.dart';
+import 'package:gf/src/modules/history/pages/history_page.dart';
 import 'package:gf/src/shared/colors/colors.dart';
 import 'src/modules/dashboard/page/dashboard_page.dart';
 import 'src/modules/List/page/list_page.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gf/src/modules/history/components/delete_orders_dialog.dart';
 import 'package:gf/src/modules/history/services/history_service.dart';
 import 'package:gf/src/modules/order/model/order_model.dart' as model;
 import 'package:gf/src/shared/colors/colors.dart';
@@ -13,22 +14,25 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  late Future<List<model.Order>> _futureOrders;
-  String _selectedCategory = 'Cancelados';
+  late Future<List<model.Order>> _dbfutureOrders;
+  String _selectedCategory = 'Cancelados'; //TODO: Mudar para "Todos"
 
   @override
   void initState() {
     super.initState();
-    _futureOrders = HistoryService.getCancelledOrders();
+    _dbfutureOrders = HistoryService.getCancelledOrders();//TODO: Mudar para _dbfutureOrders == HistoryService.getAllOrders();
   }
 
   void _onCategoryChanged(String? value) {
     setState(() {
       _selectedCategory = value!;
       if (_selectedCategory == 'Cancelados') {
-        _futureOrders = HistoryService.getCancelledOrders();
-      } else {
-        _futureOrders = Future.value([]); // Placeholder para "Finalizados"
+        _dbfutureOrders = HistoryService.getCancelledOrders();
+      }if(_selectedCategory == 'Todos'){
+        _dbfutureOrders == HistoryService.getAllOrders();
+      }
+      else {
+        //_dbfutureOrders == HistoryService.getDoneOrders();
       }
     });
   }
@@ -56,17 +60,17 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: AppColors.buttonColor, // Cor do fundo do botão
+                    color: AppColors.buttonColor,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 1),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                      dropdownColor: Colors.red, // Cor de fundo do dropdown
-                      iconEnabledColor: Colors.black, // Cor do ícone do dropdown
+                      dropdownColor: AppColors.buttonColor,
+                      iconEnabledColor: Colors.white,
                       value: _selectedCategory,
                       onChanged: _onCategoryChanged,
-                      items: <String>['Cancelados', 'Finalizados']
+                      items: <String>['Todos','Cancelados', 'Finalizados']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -84,7 +88,7 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
           Expanded(
             child: FutureBuilder<List<model.Order>>(
-              future: _futureOrders,
+              future: _dbfutureOrders,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -100,7 +104,27 @@ class _HistoryPageState extends State<HistoryPage> {
                   itemBuilder: (context, index) {
                     var order = snapshot.data![index];
                     return ExpansionTile(
-                      title: Text('Total do Pedido: R\$${order.total.toStringAsFixed(2)} => ${formatDateTime(order.createdAt)}'),
+                    title: Text('Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                    fontSize: 18 ,
+                    fontWeight: FontWeight.bold,
+                    ),),
+                    subtitle: Text(formatDateTime(order.createdAt)),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete, color: AppColors.buttonColor),
+                        onPressed: () {
+                          deleteOrderDialog(
+                            context: context,
+                            orderId: order.id,
+                            onDelete: () async {
+                              await HistoryService.deleteOrder(order.id);
+                              setState(() {
+                                _dbfutureOrders = HistoryService.getCancelledOrders();
+                              });
+                            },
+                          );
+                        },
+                      ),
                       children: [
                         ...order.products.map((product) {
                           var additions = product.additions.map((add) => add['name']).join(', ');
@@ -116,13 +140,13 @@ class _HistoryPageState extends State<HistoryPage> {
                             ),
                           );
                         }).toList(),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Text(
+                        //     'Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
+                        //     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        //   ),
+                        // ),
                       ],
                     );
                   },

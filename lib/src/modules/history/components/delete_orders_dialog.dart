@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gf/src/shared/components/red_button.dart';
 
-cancelOrderDialog({
+deleteOrderDialog({
   required BuildContext context,
   required String orderId,
   required VoidCallback onDelete,
@@ -10,10 +10,10 @@ cancelOrderDialog({
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text("Deseja realmente cancelar este pedido?"),
+        title: const Text("Deseja realmente excluir este pedido?"),
         actions: [
           RedButton(
-            text: "Cancelar Pedido",
+            text: "Excluir Pedido",
             onPressed: () {
               onDelete();
               Navigator.of(context).pop();

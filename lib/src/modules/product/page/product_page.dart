@@ -111,7 +111,6 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                           child: ListTile(
                             onTap: () {
-                              // print('Clicou');
                             },
                             onLongPress: () => ProductFormModal.showFormModal(context, bdFirebase, refresh, model: model),
                             leading: const Icon(Icons.fastfood),

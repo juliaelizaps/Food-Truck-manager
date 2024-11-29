@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gf/src/modules/List/components/cancel_orders_dialog.dart';
 import 'package:gf/src/modules/List/services/list_service.dart';
+import 'package:gf/src/modules/list/components/cancel_orders_dialog.dart';
 import 'package:gf/src/modules/order/model/order_model.dart' as model;
+import 'package:gf/src/shared/colors/colors.dart';
 import 'package:gf/src/shared/components/sideBar.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
@@ -48,46 +49,58 @@ class _ListPageState extends State<ListPage> {
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               var order = snapshot.data![index];
-              return ExpansionTile(
-                title: Text('Total do Pedido: R\$${order.total.toStringAsFixed(2)} => ${formatDateTime(order.createdAt)}'),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
-                  onPressed: () {
-                    deleteOrderDialog(
-                      context: context,
-                      orderId: order.id,
-                      onDelete: () async {
-                        await ListService.cancelOrder(order.id);
-                        setState(() {
-                          _futureOrders = ListService.getOrders();
-                        });
-                      },
-                    );
-                  },
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300, width: 1.0),
+                  borderRadius:BorderRadius.circular(5.0),
                 ),
-                children: [
-                  ...order.products.map((product) {
-                    var additions = product.additions.map((add) => add['name']).join(', ');
-                    return ListTile(
-                      title: Text(product.name),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (product.comment.isNotEmpty) Text("Observação: ${product.comment}"),
-                          if (product.additions.isNotEmpty) Text("Adicionais: $additions"),
-                          Text("Preço: R\$${product.price.toStringAsFixed(2)}"),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
+                child: ExpansionTile(
+                  title: Text('Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 18 ,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                  subtitle: Text(formatDateTime(order.createdAt)),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.cancel, color: AppColors.buttonColor),
+                    onPressed: () {
+                      cancelOrderDialog(
+                        context: context,
+                        orderId: order.id,
+                        onDelete: () async {
+                          await ListService.cancelOrder(order.id);
+                          setState(() {
+                            _futureOrders = ListService.getOrders();
+                          });
+                        },
+                      );
+                    },
                   ),
-                ],
+                  children: [
+                    ...order.products.map((product) {
+                      var additions = product.additions.map((add) => add['name']).join(', ');
+                      return ListTile(
+                        title: Text(product.name),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (product.comment.isNotEmpty) Text("Observação: ${product.comment}"),
+                            if (product.additions.isNotEmpty) Text("Adicionais: $additions"),
+                            Text("Preço: R\$${product.price.toStringAsFixed(2)}"),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Text(
+                    //     'Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
+                    //     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    //   ),
+                    // ),
+                  ],
+                ),
               );
             },
           );
