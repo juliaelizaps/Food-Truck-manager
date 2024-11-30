@@ -11,8 +11,10 @@ class HistoryService {
         .get();
     return ordersSnapshot.docs.map((doc) => model.Order.fromMap(doc.data())).toList();
   }
+
   static Future<void> deleteOrder(String orderId) async {
             await _dbfirestore.collection('Pedidos Cancelados').doc(orderId).delete();
+            await _dbfirestore.collection('Pedidos').doc(orderId).delete();
   }
   static Future<List<model.Order>> getAllOrders() async {
     var ordersSnapshot = await _dbfirestore
