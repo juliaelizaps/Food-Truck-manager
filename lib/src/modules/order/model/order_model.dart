@@ -6,6 +6,8 @@ class Order {
   final List<OrderProduct> products;
   final double total;
   final DateTime createdAt;
+  final String status;
+
 
   Order({
     required this.id,
@@ -13,16 +15,17 @@ class Order {
     required this.products,
     required this.total,
     required this.createdAt,
+    this.status = 'IN_PROGRESS',
+
   });
 
   Order.fromMap(Map<String, dynamic> map)
       : id = map["id"],
         comment = map["comment"],
-        products = (map["products"] as List)
-            .map((product) => OrderProduct.fromMap(product))
-            .toList(),
+        products = (map["products"] as List).map((product) => OrderProduct.fromMap(product)).toList(),
         total = map["total"],
-        createdAt = (map["createdAt"] as Timestamp).toDate();
+        createdAt = (map["createdAt"] as Timestamp).toDate(),
+        status= map ["status"];
 
   Map<String, dynamic> toMap() {
     return {
@@ -30,7 +33,8 @@ class Order {
       "comment": comment,
       "products": products.map((product) => product.toMap()).toList(),
       "total": total,
-      'createdAt': Timestamp.fromDate(createdAt),
+      "createdAt": Timestamp.fromDate(createdAt),
+      "status" : status,
     };
   }
 }

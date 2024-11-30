@@ -5,11 +5,25 @@ class ListService {
   static final FirebaseFirestore _dbfirestore = FirebaseFirestore.instance;
 
   static Future<List<model.Order>> getOrders() async {
-    var ordersSnapshot = await _dbfirestore
-        .collection('Pedidos')
-        .orderBy('createdAt', descending: true)
-        .get();
-    return ordersSnapshot.docs.map((doc) => model.Order.fromMap(doc.data())).toList();
+    try {
+      var ordersSnapshot = await _dbfirestore
+          .collection('Pedidos')
+          .where("status", isEqualTo: "IN_PROGRESS")
+          .orderBy('createdAt', descending: true)
+          .get();
+      print("Quantidade de pedidos obtidos: ${ordersSnapshot.docs.length}");
+      for (var doc in ordersSnapshot.docs){
+        print("Pedido: ${doc.data()}");
+      }
+      return ordersSnapshot.docs.map((doc) => model.Order.fromMap(doc.data())).toList();
+    } catch (e) {
+      print("Erro ao carregar pedidos: $e");
+      return [];
+    }
+  }
+
+  static Future<void> updateOrderStatus(String orderId, String status) async {
+    await _dbfirestore.collection('Pedidos').doc(orderId).update({'status': status});
   }
 
   static Future<List<model.Order>> getCancelledOrders() async {

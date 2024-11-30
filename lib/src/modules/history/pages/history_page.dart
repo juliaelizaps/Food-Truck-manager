@@ -15,12 +15,21 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   late Future<List<model.Order>> _dbfutureOrders;
-  String _selectedCategory = 'Cancelados'; //TODO: Mudar para "Todos"
+  String _selectedCategory = 'Todos';
+  Set<String> _cancelledOrderIds = {};
 
   @override
   void initState() {
     super.initState();
-    _dbfutureOrders = HistoryService.getCancelledOrders();//TODO: Mudar para _dbfutureOrders == HistoryService.getAllOrders();
+    _dbfutureOrders = HistoryService.getAllOrders();
+    _loadCancelledOrders();
+  }
+
+  void _loadCancelledOrders() async {
+    var cancelledOrders = await HistoryService.getCancelledOrders();
+    setState(() {
+      _cancelledOrderIds = cancelledOrders.map((order) => order.id).toSet();
+    });
   }
 
   void _onCategoryChanged(String? value) {
@@ -28,17 +37,37 @@ class _HistoryPageState extends State<HistoryPage> {
       _selectedCategory = value!;
       if (_selectedCategory == 'Cancelados') {
         _dbfutureOrders = HistoryService.getCancelledOrders();
-      }if(_selectedCategory == 'Todos'){
-        _dbfutureOrders == HistoryService.getAllOrders();
-      }
-      else {
-        //_dbfutureOrders == HistoryService.getDoneOrders();
+      } else if (_selectedCategory == 'Todos') {
+        _dbfutureOrders = HistoryService.getAllOrders();
+      } else if (_selectedCategory == 'Finalizados') {
+        _dbfutureOrders = HistoryService.getFinishedOrders();
+      } else if (_selectedCategory == 'Em andamento') {
+        _dbfutureOrders = HistoryService.getInProgressOrders();
       }
     });
   }
 
   String formatDateTime(DateTime dateTime) {
     return DateFormat('dd/MM/yyyy HH:mm').format(dateTime);
+  }
+
+  Widget _buildStatusChip(String status) {
+    String label = '';
+    Color color = Colors.grey;
+
+    if (status == 'FINISHED') {
+      label = 'Finalizado';
+      color = Colors.green;
+    } else if (status == 'IN_PROGRESS') {
+      label = 'Em andamento';
+      color = Colors.blue;
+    }
+
+    return Chip(
+      label: Text(label),
+      backgroundColor: color,
+      labelStyle: const TextStyle(color: Colors.white),
+    );
   }
 
   @override
@@ -70,7 +99,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       iconEnabledColor: Colors.white,
                       value: _selectedCategory,
                       onChanged: _onCategoryChanged,
-                      items: <String>['Todos','Cancelados', 'Finalizados']
+                      items: <String>['Todos', 'Em andamento', 'Finalizados', 'Cancelados']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -103,13 +132,24 @@ class _HistoryPageState extends State<HistoryPage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     var order = snapshot.data![index];
+                    var textColor = _cancelledOrderIds.contains(order.id) ? Colors.red : Colors.black;
                     return ExpansionTile(
-                    title: Text('Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                    fontSize: 18 ,
-                    fontWeight: FontWeight.bold,
-                    ),),
-                    subtitle: Text(formatDateTime(order.createdAt)),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildStatusChip(order.status),
+                          const SizedBox(height: 1.0),
+                          Text(
+                            'Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: textColor,  // Define a cor do texto
+                            ),
+                          ),
+                        ],
+                      ),
+                      subtitle: Text(formatDateTime(order.createdAt)),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete, color: AppColors.buttonColor),
                         onPressed: () {
@@ -140,13 +180,6 @@ class _HistoryPageState extends State<HistoryPage> {
                             ),
                           );
                         }).toList(),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Text(
-                        //     'Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
-                        //     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        //   ),
-                        // ),
                       ],
                     );
                   },
