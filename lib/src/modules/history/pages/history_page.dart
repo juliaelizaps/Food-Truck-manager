@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'package:excel/excel.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:gf/src/modules/history/components/delete_orders_dialog.dart';
 import 'package:gf/src/modules/history/services/history_service.dart';
@@ -15,14 +19,23 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   late Future<List<model.Order>> _dbfutureOrders;
-  String _selectedCategory = 'Todos';
   Set<String> _cancelledOrderIds = {};
+  List<model.Order> _orders = [];
+  String _selectedCategory = 'Todos';
 
   @override
   void initState() {
     super.initState();
     _dbfutureOrders = HistoryService.getAllOrders();
     _loadCancelledOrders();
+    _loadOrders();
+  }
+
+  void _loadOrders() async {
+    var orders = await _dbfutureOrders;
+    setState(() {
+      _orders = orders;
+    });
   }
 
   void _loadCancelledOrders() async {
@@ -44,6 +57,7 @@ class _HistoryPageState extends State<HistoryPage> {
       } else if (_selectedCategory == 'Em andamento') {
         _dbfutureOrders = HistoryService.getInProgressOrders();
       }
+      _loadOrders();
     });
   }
 
@@ -75,6 +89,15 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Histórico de Pedidos'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.download),
+            onPressed: () {
+              HistoryService.generateExcelReport(_orders);
+              print('clicou em baixarrr');
+            },
+          ),
+        ],
       ),
       drawer: const SideBar(),
       body: Column(
@@ -137,8 +160,8 @@ class _HistoryPageState extends State<HistoryPage> {
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildStatusChip(order.status),
-                          const SizedBox(height: 1.0),
+                          _buildStatusChip(order.status), // Coloca o Chip acima
+                          const SizedBox(height: 8.0),
                           Text(
                             'Total do Pedido: R\$${order.total.toStringAsFixed(2)}',
                             style: TextStyle(
