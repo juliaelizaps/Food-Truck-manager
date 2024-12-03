@@ -51,6 +51,7 @@ class HistoryService {
     return ordersSnapshot.docs.map((doc) => model.Order.fromMap(doc.data())).toList();
   }
 
+  //será usado no futuro para baixar relatórios:
   static Future<void> generateExcelReport(List<model.Order> orders) async {
     var excel = Excel.createExcel();
     Sheet sheetObject = excel['Pedidos'];
