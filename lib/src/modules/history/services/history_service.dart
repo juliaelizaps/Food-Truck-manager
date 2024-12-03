@@ -24,7 +24,8 @@ class HistoryService {
     var ordersSnapshot = await _dbfirestore
         .collection('Pedidos')
         .orderBy('createdAt', descending: true)
-        .get(); var cancelledOrdersSnapshot = await _dbfirestore
+        .get();
+    var cancelledOrdersSnapshot = await _dbfirestore
         .collection('Pedidos Cancelados')
         .orderBy('createdAt', descending: true)
         .get();

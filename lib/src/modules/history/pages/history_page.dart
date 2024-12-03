@@ -75,6 +75,9 @@ class _HistoryPageState extends State<HistoryPage> {
     } else if (status == 'IN_PROGRESS') {
       label = 'Em andamento';
       color = Colors.blue;
+    }else if (status == 'CANCELLED') {
+      label = 'Cancelado';
+      color = AppColors.buttonColor;
     }
 
     return Chip(
@@ -167,7 +170,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: textColor,  // Define a cor do texto
+                              color: textColor,
                             ),
                           ),
                         ],
@@ -197,7 +200,6 @@ class _HistoryPageState extends State<HistoryPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 if (product.comment.isNotEmpty) Text("Observação: ${product.comment}"),
-                                if (product.additions.isNotEmpty) Text("Adicionais: $additions"),
                                 Text("Preço: R\$${product.price.toStringAsFixed(2)}"),
                               ],
                             ),

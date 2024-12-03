@@ -92,6 +92,7 @@ class _ListPageState extends State<ListPage> {
                           context: context,
                           orderId: order.id,
                           onDelete: () async {
+                            _updateOrderStatus(order.id, 'CANCELLED');
                             await ListService.cancelOrder(order.id);
                             setState(() {
                               _futureOrders = ListService.getOrders();
