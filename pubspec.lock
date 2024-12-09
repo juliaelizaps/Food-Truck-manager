@@ -301,7 +301,7 @@ packages:
       name: fl_chart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.36.4"
+    version: "0.60.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -381,7 +381,7 @@ packages:
     source: hosted
     version: "3.3.0"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -527,13 +527,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.6"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.11.1"
   permission_handler:
     dependency: "direct main"
     description:

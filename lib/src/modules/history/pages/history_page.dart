@@ -1,7 +1,3 @@
-import 'dart:io';
-import 'package:excel/excel.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:gf/src/modules/history/components/delete_orders_dialog.dart';
 import 'package:gf/src/modules/history/services/history_service.dart';
@@ -193,7 +189,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       ),
                       children: [
                         ...order.products.map((product) {
-                          var additions = product.additions.map((add) => add['name']).join(', ');
+                         //var additions = product.additions.map((add) => add['name']).join(', ');
                           return ListTile(
                             title: Text(product.name),
                             subtitle: Column(

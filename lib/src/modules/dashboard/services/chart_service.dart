@@ -8,8 +8,8 @@ class ChartService {
     var ordersSnapshot = await _firestore.collection('Pedidos').get();
     Map<String, double> revenueData = {};
     for (var doc in ordersSnapshot.docs) {
-      var orders = order_model.Order.fromMap(doc.data());
-      var date = orders.createdAt;
+      var order = order_model.Order.fromMap(doc.data());
+      var date = order.createdAt;
       String key;
       switch (period) {
         case 'Diário':
@@ -26,7 +26,7 @@ class ChartService {
       if (!revenueData.containsKey(key)) {
         revenueData[key] = 0.0;
       }
-      revenueData[key] = revenueData[key]! + orders.total;
+      revenueData[key] = revenueData[key]! + order.total;
     }
     return revenueData;
   }

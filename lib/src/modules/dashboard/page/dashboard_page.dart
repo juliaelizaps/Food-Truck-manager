@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gf/src/modules/dashboard/components/activity_list.dart';
+import 'package:gf/src/modules/dashboard/components/bar_graph.dart';
 import 'package:gf/src/modules/dashboard/components/dashboard_card.dart';
 import 'package:gf/src/modules/dashboard/components/revenue_chart.dart';
 import 'package:gf/src/modules/dashboard/services/firebase_service.dart';
@@ -111,9 +112,11 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
               const SizedBox(height: 8),
-              ActivityList(),
+              const ActivityList(),
               const SizedBox(height: 16),
-              const RevenueChart(),
+              //const RevenueChart(),
+              const MyBarGraph(weeklySummary:
+              [140.0, 120.0, 220.0, 200.0, 150.0, 160.0, 90.0],),
             ],
           ),
         ),
